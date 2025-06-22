@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "build:ui": "rm -rf dist && cd ../../p02/phonebook && npm run build && cp -r dist ../../p03/phonebook-backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m 'ui build' && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Layth Barzangi",
@@ -12,7 +14,9 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "mongoose": "^8.15.2",
     "morgan": "^1.10.0"
   }
 }
