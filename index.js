@@ -50,7 +50,7 @@ app.delete("/api/people/:id", (request, response) => {
 });
 
 // add person
-app.post("/api/people", (request, response) => {
+app.post("/api/people", (request, response, next) => {
   const body = request.body;
 
   const person = new Person({
@@ -58,9 +58,12 @@ app.post("/api/people", (request, response) => {
     number: body.number,
   });
 
-  person.save().then((savedPerson) => {
-    response.json(savedPerson);
-  });
+  person
+    .save()
+    .then((savedPerson) => {
+      response.json(savedPerson);
+    })
+    .catch((error) => next(error));
 });
 
 // update person
